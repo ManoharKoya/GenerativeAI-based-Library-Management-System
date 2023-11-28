@@ -13,6 +13,12 @@ class CheckoutService:
         existing_copy = self.checkout_repository.book_copy_repository.get_book_copy_by_id(copy_id)
 
         if existing_user and existing_copy:
+            # Check if the user has reached the maximum number of checkouts (e.g., 5)
+            active_checkouts = self.checkout_repository.get_active_checkouts_by_user(user_id)
+            if len(active_checkouts) >= 5:
+                print(f"Max limit of 5 checkouts is attained for the user {existing_user.UserName}")
+                return None
+
             new_checkout = Checkout(None, existing_copy, existing_user, None, None)
             self.checkout_repository.add_checkout(new_checkout)
             return new_checkout.CheckoutID
