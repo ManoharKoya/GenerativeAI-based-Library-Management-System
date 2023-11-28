@@ -39,19 +39,28 @@ if __name__ == "__main__":
     checkout_service = CheckoutService(checkout_repo)
 
     # Example checkout_book
-    new_checkout_id = checkout_service.checkout_book(3, 5)
-    print("New Checkout ID:", new_checkout_id)
+    checkout_service.checkout_book(8, 3)
+    checkout_service.checkout_book(8, 4)
+    checkout_service.checkout_book(8, 5)
+    checkout_service.checkout_book(8, 6)
+    checkout_service.checkout_book(8, 7)
+    checkout_service.checkout_book(8, 8)
 
     # Example return_book
-    checkout_service.return_book(5)
+    # checkout_service.return_book(3)
+    # checkout_service.return_book(4)
+    # checkout_service.return_book(5)
+    # checkout_service.return_book(6)
+    # checkout_service.return_book(7)
 
     # Example get_checkout_history_by_user
-    checkout_history = checkout_service.get_checkout_history_by_user(2)
-    print("Checkout History:", [checkout.__dict__ for checkout in checkout_history])
+    # checkout_history = checkout_service.get_checkout_history_by_user(8)
+    # print("Checkout History:", [checkout.__dict__ for checkout in checkout_history])
 
     # Example get_active_checkouts_by_user
-    active_checkouts = checkout_service.get_active_checkouts_by_user(2)
-    print("Active Checkouts:", [checkout.__dict__ for checkout in active_checkouts])
+    # active_checkouts = checkout_service.get_active_checkouts_by_user(8)
+    # print("Active Checkouts:", [checkout.__dict__ for checkout in active_checkouts])
+
     # book_repo = BookRepository(**db_config)
     # book_copy_repo = BookCopyRepository(**db_config, book_repository=book_repo)
     # book_copy_service = BookCopyService(book_copy_repo)

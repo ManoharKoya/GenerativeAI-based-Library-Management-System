@@ -87,6 +87,26 @@ class CheckoutRepository:
         except mysql.connector.Error as err:
             print("Error:", err)
 
+    def get_checkout_by_id(self, checkout_id):
+        query = "SELECT * FROM Checkout WHERE CheckoutID = %s"
+
+        try:
+            self.cursor.execute(query, (checkout_id,))
+            checkout_data = self.cursor.fetchone()
+
+            if checkout_data:
+                checkout = Checkout(checkout_data[0],
+                                    self.book_copy_repository.get_book_copy_by_id(checkout_data[1]),
+                                    self.user_repository.get_user_by_id(checkout_data[2]),
+                                    checkout_data[3], checkout_data[4])
+                return checkout
+            else:
+                return None
+
+        except mysql.connector.Error as err:
+            print("Error:", err)
+            return None
+
     def get_active_checkouts_by_user(self, user_id):
         query = "SELECT Checkout.* FROM Checkout \
                  JOIN BookCopy ON Checkout.CopyID = BookCopy.CopyID \
@@ -94,15 +114,26 @@ class CheckoutRepository:
 
         try:
             self.cursor.execute(query, (user_id,))
-            active_checkouts = []
+            active_checkouts_dict = {}  # Dictionary to store the latest checkout for each book_copy_id
 
             for checkout_data in self.cursor.fetchall():
-                checkout = Checkout(checkout_data[0], self.book_copy_repository.get_book_copy_by_id(checkout_data[1]),
-                                    self.user_repository.get_user_by_id(checkout_data[2]),
-                                    checkout_data[3], checkout_data[4])
-                active_checkouts.append(checkout)
+                checkout_id = checkout_data[0]
+                book_copy_id = checkout_data[1]
+                checkout_date = checkout_data[3]
+
+                # Check if the book_copy_id is not in the dictionary or if the checkout_date is later
+                if book_copy_id not in active_checkouts_dict or checkout_date > active_checkouts_dict[book_copy_id][3]:
+                    active_checkouts_dict[book_copy_id] = checkout_data
+
+            # Convert the dictionary values back to check out objects
+            active_checkouts = [Checkout(checkout_data[0],
+                                         self.book_copy_repository.get_book_copy_by_id(checkout_data[1]),
+                                         self.user_repository.get_user_by_id(checkout_data[2]),
+                                         checkout_data[3], checkout_data[4]) for checkout_data in
+                                active_checkouts_dict.values()]
 
             return active_checkouts
+
         except mysql.connector.Error as err:
             print("Error:", err)
 
@@ -128,7 +159,3 @@ class CheckoutRepository:
             return checkout_history
         except mysql.connector.Error as err:
             print("Error:", err)
-
-
-
-
