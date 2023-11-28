@@ -85,3 +85,43 @@ class BookRepository:
 
         except mysql.connector.Error as err:
             print("Error:", err)
+
+    def get_books_by_author(self, author):
+        query = "SELECT * FROM Book WHERE Author = %s"
+
+        try:
+            self.cursor.execute(query, (author,))
+            books_by_author = []
+            for book_data in self.cursor.fetchall():
+                if book_data:
+                    book = Book(book_data[0], book_data[1], book_data[2], book_data[3])
+                    books_by_author.append(book)
+
+            if len(books_by_author) == 0:
+                print("Book not found.")
+                return None
+
+            return books_by_author
+
+        except mysql.connector.Error as err:
+            print("Error:", err)
+
+    def get_books_by_genre(self, genre):
+        query = "SELECT * FROM Book WHERE Genre = %s"
+
+        try:
+            self.cursor.execute(query, (genre,))
+            books_by_genre = []
+            for book_data in self.cursor.fetchall():
+                if book_data:
+                    book = Book(book_data[0], book_data[1], book_data[2], book_data[3])
+                    books_by_genre.append(book)
+
+            if len(books_by_genre) == 0:
+                print("Book not found.")
+                return None
+
+            return books_by_genre
+
+        except mysql.connector.Error as err:
+            print("Error:", err)
