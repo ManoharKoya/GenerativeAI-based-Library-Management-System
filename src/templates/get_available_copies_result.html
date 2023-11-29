@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Available Book Copies Result</title>
+</head>
+<body>
+    <h1>Get Available Book Copies Result</h1>
+    <ul>
+        {% for copy in copies %}
+            <li>Copy ID: {{ copy.CopyID }} (Status: {{ copy.Status }})</li>
+        {% endfor %}
+    </ul>
+    <a href="/">Back to Home</a>
+</body>
+</html>
