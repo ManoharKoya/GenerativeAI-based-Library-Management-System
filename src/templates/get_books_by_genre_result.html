@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Books By Genre Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='form_result_style.css') }}">
 </head>
 <body>
     <h1>Get Books By Genre Result</h1>
+    <section>
     <ul>
         {% for book in books %}
             <li>{{ book.Title }} by {{ book.Author }} (Genre: {{ book.Genre }})</li>
         {% endfor %}
     </ul>
     <a href="/">Back to Home</a>
+        </section>
 </body>
 </html>

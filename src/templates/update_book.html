@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Book</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='form_style.css') }}">
 </head>
 <body>
     <h1>Update Book</h1>
+    <section>
+
     <form method="post">
         <label for="book_id">Book ID:</label>
         <input type="number" name="book_id" required><br>
@@ -16,7 +19,8 @@
         <input type="text" name="new_author" required><br>
         <label for="new_genre">New Genre:</label>
         <input type="text" name="new_genre" required><br>
-        <input type="submit" value="Update Book">
+        <button type="submit" >Update Book</button>
     </form>
+        </section>
 </body>
 </html>

@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Books By Author Result</title>
+    <title>Get Active Checkouts Result</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='form_result_style.css') }}">
 </head>
 <body>
-    <h1>Get Books By Author Result</h1>
+    <h1>Get Active Checkouts Result</h1>
     <section>
     <ul>
-        {% for book in books %}
-            <li>{{ book.Title }} by {{ book.Author }} (Genre: {{ book.Genre }})</li>
+        {% for checkout in checkouts %}
+            <li>Checkout ID: {{ checkout.CheckoutID }} - Copy ID: {{ checkout.Copy.CopyID }} - Status: {{ checkout.Copy.Status }} - Checkout Date: {{ checkout.CheckoutDate }} - Return Date: {{ checkout.ReturnDate }}</li>
         {% endfor %}
     </ul>
     <a href="/">Back to Home</a>

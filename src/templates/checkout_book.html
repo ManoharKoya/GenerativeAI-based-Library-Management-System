@@ -3,16 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Books By Genre</title>
+    <title>Checkout Book</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='form_style.css') }}">
 </head>
 <body>
-    <h1>Get Books By Genre</h1>
+    <h1>Checkout Book</h1>
     <section>
     <form method="post">
-        <label for="genre">Genre:</label>
-        <input type="text" name="genre" required><br>
-        <button type="submit">Get Books By Genre</button>
+        <label for="user_id">User ID:</label>
+        <input type="number" name="user_id" required><br>
+        <label for="copy_id">Copy ID:</label>
+        <input type="number" name="copy_id" required><br>
+        <button type="submit" >Checkout Book</button>
     </form>
         </section>
 </body>

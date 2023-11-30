@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remove User</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='form_style.css') }}">
 </head>
 <body>
     <h1>Remove User</h1>
+    <section>
     <form method="post">
         <label for="user_id">User ID:</label>
         <input type="number" name="user_id" required><br>
-        <input type="submit" value="Remove User">
+        <button type="submit" >Remove User</button>
     </form>
+        </section>
 </body>
 </html>

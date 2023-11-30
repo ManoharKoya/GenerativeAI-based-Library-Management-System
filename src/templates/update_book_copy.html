@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Update Book Copy</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='form_style.css') }}">
 </head>
 <body>
     <h1>Update Book Copy</h1>
-    <form method="post">
+    <section>
+        <form method="post">
         <label for="book_copy_id">Book Copy ID:</label>
         <input type="number" name="book_copy_id" required><br>
         <label for="book_id">Book ID:</label>
         <input type="number" name="book_id" required><br>
         <label for="status">Status:</label>
         <input type="text" name="status" required><br>
-        <input type="submit" value="Update Book Copy">
+        <button type="submit">Update Book Copy</button>
     </form>
+        </section>
 </body>
 </html>

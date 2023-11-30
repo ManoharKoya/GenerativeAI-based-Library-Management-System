@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Books By Author</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='form_style.css') }}">
 </head>
 <body>
     <h1>Get Books By Author</h1>
+    <section>
     <form method="post">
         <label for="author">Author Name:</label>
         <input type="text" name="author" required><br>
-        <input type="submit" value="Get Books By Author">
+        <button type="submit" >Get Books By Author</button>
     </form>
+        </section>
 </body>
 </html>

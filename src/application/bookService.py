@@ -10,6 +10,7 @@ class BookService:
     def add_book(self, title, author, genre):
         new_book = Book(None, title, author, genre)
         self.book_repository.add_book(new_book)
+        return "New book added successfully!"
 
     def remove_book(self, book_id):
         self.book_repository.remove_book(book_id)
@@ -38,3 +39,4 @@ class BookService:
             self.book_repository.update_book(existing_book)
         else:
             print("There is no book with id:", book_id)
+        return "Updated book successfully!"

@@ -2,11 +2,14 @@ from flask import Flask, render_template, request
 from application.userService import UserService
 from application.bookService import BookService
 from application.bookCopyService import BookCopyService
+from application.checkoutService import CheckoutService
 from data.userRepository import UserRepository
 from data.bookRepository import BookRepository
 from data.bookCopyRepository import BookCopyRepository
+from data.checkoutRepository import CheckoutRepository
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
+
 
 # Replace these with your MySQL database credentials
 db_config = {
@@ -24,6 +27,9 @@ book_service = BookService(book_repo)
 
 book_copy_repo = BookCopyRepository(**db_config, book_repository=book_repo)
 book_copy_service = BookCopyService(book_copy_repo)
+
+checkout_repo = CheckoutRepository(**db_config, book_copy_repository=book_copy_repo, user_repository=user_repo)
+checkout_service = CheckoutService(checkout_repo)
 
 
 @app.route('/')
@@ -182,6 +188,59 @@ def update_book_copy():
         return render_template('update_book_copy_result.html', result=result)
 
     return render_template('update_book_copy.html')
+
+
+@app.route('/checkout_book', methods=['GET', 'POST'])
+def checkout_book():
+    if request.method == 'POST':
+        user_id = int(request.form['user_id'])
+        copy_id = int(request.form['copy_id'])
+
+        # Call the CheckoutService method
+        result = checkout_service.checkout_book(user_id, copy_id)
+
+        return render_template('checkout_book_result.html', result=result)
+
+    return render_template('checkout_book.html')
+
+
+@app.route('/return_book', methods=['GET', 'POST'])
+def return_book():
+    if request.method == 'POST':
+        copy_id = int(request.form['copy_id'])
+
+        # Call the CheckoutService method
+        result = checkout_service.return_book(copy_id)
+
+        return render_template('return_book_result.html', result=result)
+
+    return render_template('return_book.html')
+
+
+@app.route('/get_checkout_history_by_user', methods=['GET', 'POST'])
+def get_checkout_history_by_user():
+    if request.method == 'POST':
+        user_id = int(request.form['user_id'])
+
+        # Call the CheckoutService method
+        checkouts = checkout_service.get_checkout_history_by_user(user_id)
+
+        return render_template('get_checkout_history_by_user_result.html', checkouts=checkouts)
+
+    return render_template('get_checkout_history_by_user.html')
+
+
+@app.route('/get_active_checkouts_by_user', methods=['GET', 'POST'])
+def get_active_checkouts_by_user():
+    if request.method == 'POST':
+        user_id = int(request.form['user_id'])
+
+        # Call the CheckoutService method
+        checkouts = checkout_service.get_active_checkouts_by_user(user_id)
+
+        return render_template('get_active_checkouts_by_user_result.html', checkouts=checkouts)
+
+    return render_template('get_active_checkouts_by_user.html')
 
 
 if __name__ == '__main__':

@@ -20,6 +20,7 @@ class UserService:
 
         new_user = User(None, new_user_name, new_user_type)
         self.user_repository.add_user(new_user)
+        return "Added user successfully!"
 
     def update_user(self, user_id, new_user_name):
         # Validate new_user_name
@@ -34,6 +35,7 @@ class UserService:
             self.user_repository.update_user(existing_user)
         else:
             print("Error: User not found.")
+        return "Updated user successfully!"
 
     def remove_user(self, user_id):
         self.user_repository.remove_user(user_id)

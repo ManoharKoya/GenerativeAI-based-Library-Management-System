@@ -1,24 +1,67 @@
-<!-- templates/index.html -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Welcome to Library Services</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            padding: 20px;
+            background-color: #4CAF50;
+            color: white;
+            margin: 0;
+        }
+
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #3498db;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #1a5276;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome to Services</h1>
-    <div>
+    <h1>Welcome to Library Services</h1>
+
+    <section>
         <h2>User Services</h2>
         <ul>
             <li><a href="/add_user">Add User</a></li>
             <li><a href="/update_user">Update User</a></li>
-            <li><a href="/remove_user">Remove User</a></li>
             <li><a href="/get_user">Get User Details</a></li>
         </ul>
-    </div>
-    <div>
+    </section>
+
+    <section>
         <h2>Book Services</h2>
         <ul>
             <li><a href="/add_book">Add New Book</a></li>
@@ -29,6 +72,16 @@
             <li><a href="/get_available_copies">Get Available Book Copies</a></li>
             <li><a href="/update_book_copy">Update Book Copy</a></li>
         </ul>
-    </div>
+    </section>
+
+    <section>
+        <h2>Checkout Services</h2>
+        <ul>
+            <li><a href="/checkout_book">Checkout Book</a></li>
+            <li><a href="/return_book">Return Book</a></li>
+            <li><a href="/get_checkout_history_by_user">Get Checkout History By User</a></li>
+            <li><a href="/get_active_checkouts_by_user">Get Active Checkouts By User</a></li>
+        </ul>
+    </section>
 </body>
 </html>

@@ -4,13 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get Available Book Copies</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='form_style.css') }}">
 </head>
 <body>
     <h1>Get Available Book Copies</h1>
+    <section>
     <form method="post">
         <label for="book_id">Book ID:</label>
         <input type="number" name="book_id" required><br>
-        <input type="submit" value="Get Available Book Copies">
+        <button type="submit" >Get Available Book Copies</button>
     </form>
+        </section>
 </body>
 </html>
